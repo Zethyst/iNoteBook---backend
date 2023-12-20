@@ -15,8 +15,6 @@ var jwt = require("jsonwebtoken");
 const fs = require("fs");
 const fetchuser = require("../Middlewares/Fetchuser");
 const nodemailer = require("nodemailer");
-const { getGeolocation } = require("../Middlewares/geolocation");
-const { getUserAgentInfo } = require("../Middlewares/OperatingSystem");
 const PasswordResetTemplate = require("../utils/passwordReset");
 const isResetPasswordValid = require("../Middlewares/isResetPasswordValid");
 const NewPasswordTemplate = require("../utils/newPassword");
@@ -85,18 +83,6 @@ router.post(
 
       // Get the user's IP address
       const userIP = req.ip || req.connection.remoteAddress;
-
-      // Fetch geolocation data based on the user's IP
-      const geolocationData = await getGeolocation(userIP);
-
-      // Log or use the userIP and geolocationData as needed
-      //  console.log('User IP Address:', userIP);
-      //  console.log('Country Name:', geolocationData.country_name);
-
-      //  res.send(geolocationData.country_name);
-
-      const userAgentInfo = getUserAgentInfo(req);
-      // res.send(userAgentInfo);
 
       const transporter = nodemailer.createTransport({
         service: "gmail",

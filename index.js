@@ -4,7 +4,6 @@
 
 const connectToMongo = require("./db");
 require("dotenv").config();
-const useragent = require('express-useragent');
 
 const express = require('express')
 var cors = require("cors");
@@ -14,7 +13,6 @@ const port = 5000
 
 app.use(cors())
 app.use(express.json())
-app.use(useragent.express());
 connectToMongo();
 
 //! Available Routes
