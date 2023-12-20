@@ -384,7 +384,7 @@ router.post("/forgot-password", async (req, res) => {
       to: user.email, // list of receivers
       subject: "Reset Your iNoteBook Password", // Subject line
       html: PasswordResetTemplate(
-        `https://iNoteBook-backend-platinum.onrender.com/reset-password?token=${passwordToken}&id=${user._id}`
+        `https://inotebook-backend-platinum.onrender.com/reset-password?token=${passwordToken}&id=${user._id}`
       ),
       // html: PasswordResetTemplate(
       //   `http://localhost:3000/reset-password?token=${passwordToken}&id=${user._id}`
