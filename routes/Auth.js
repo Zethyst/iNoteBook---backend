@@ -64,9 +64,9 @@ router.post(
           .json({ error: "Sorry, a user with this email already exists" });
       }
       //?creating hashed password + salt
-      let salt = await bcrypt.genSalt(10); //10 characters salt
+      // let salt = await bcrypt.genSalt(10); //10 characters salt
       //awaiting cuz ruk jao aur iski value leke jao
-      let secPass = await bcrypt.hash(req.body.password, salt);
+      let secPass = await bcrypt.hash(req.body.password, 10);
 
       //?creating a user from post request
       const user = await User.create({
@@ -91,7 +91,7 @@ router.post(
         secure: true,
         auth: {
           user: "21052646@kiit.ac.in",
-          pass: "bpbnyvhjzsvugatm", //got the password from google account itself inside App Passwords
+          pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
         },
       });
       const filePath = path.join(__dirname, "../utils/index.html");
@@ -213,6 +213,8 @@ router.post(
             "This username doesn't exist. Double-check or sign up if you're new.",
         });
       }
+      console.log(password,user.password)
+      
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
         return res.status(400).json({
@@ -280,7 +282,7 @@ router.post("/verify-email", async (req, res) => {
       return res.status(404).json({ error: "Sorry, user not found!" });
 
     //verification by comparing the entered otp hash with stored otp hash value
-    const isMatched = await token.compareToken(otp);
+    const isMatched = token.compareToken(otp);
     if (!isMatched)
       return res.status(404).json({ error: "Please enter the correct OTP!" });
     user.verified = true;
@@ -300,7 +302,7 @@ router.post("/verify-email", async (req, res) => {
       secure: true,
       auth: {
         user: "21052646@kiit.ac.in",
-        pass: "bpbnyvhjzsvugatm", //got the password from google account itself inside App Passwords
+        pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
       },
     });
 
@@ -377,7 +379,7 @@ router.post("/forgot-password", async (req, res) => {
       secure: true,
       auth: {
         user: "21052646@kiit.ac.in",
-        pass: "bpbnyvhjzsvugatm", //got the password from google account itself inside App Passwords
+        pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
       },
     });
 
@@ -474,7 +476,7 @@ router.post("/reset-password", isResetPasswordValid, async (req, res) => {
       secure: true,
       auth: {
         user: "21052646@kiit.ac.in",
-        pass: "bpbnyvhjzsvugatm", //got the password from google account itself inside App Passwords
+        pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
       },
     });
 
@@ -539,7 +541,7 @@ router.post("/resend", async (req, res) => {
       secure: true,
       auth: {
         user: "21052646@kiit.ac.in",
-        pass: "bpbnyvhjzsvugatm", //got the password from google account itself inside App Passwords
+        pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
       },
     });
 
