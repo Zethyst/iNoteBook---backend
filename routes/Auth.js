@@ -85,6 +85,7 @@ router.post(
         name: req.body.name,
         email: req.body.email,
         password: secPass,
+        type:req.body.type,
         image:req.body.image
       });
 
