@@ -35,6 +35,10 @@ const UserSchema = new mongoose.Schema({
     default: false,
     required: true,
   },
+  image: {
+    type:String,
+    required: true,
+  },
 });
 
 // UserSchema.pre("save", async function (next) {

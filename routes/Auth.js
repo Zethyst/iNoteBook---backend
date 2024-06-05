@@ -18,8 +18,20 @@ const nodemailer = require("nodemailer");
 const PasswordResetTemplate = require("../utils/passwordReset");
 const isResetPasswordValid = require("../Middlewares/isResetPasswordValid");
 const NewPasswordTemplate = require("../utils/newPassword");
+const rateLimit = require("express-rate-limit");
+
 
 //! .. for previous folder
+
+//? Creating a rate limiter middleware
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  message: "Too many requests from this IP, please try again after 15 minutes",
+});
+
+//? Applying the rate limiter to all requests
+router.use(limiter);
 
 //whenever a user hits /api/auth/ endpoint, rest of the code goes from below
 
@@ -73,6 +85,7 @@ router.post(
         name: req.body.name,
         email: req.body.email,
         password: secPass,
+        image:req.body.image
       });
 
       let otp = generateOTP();
@@ -91,11 +104,11 @@ router.post(
         secure: true,
         auth: {
           user: "21052646@kiit.ac.in",
-          pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
+          pass: "cprnljltrvkramlu", //got the password from google account itself inside App Passwords
         },
       });
-      const filePath = path.join(__dirname, "../utils/index.html");
-      const htmlContent = fs.readFileSync(filePath, "utf-8");
+      // const filePath = path.join(__dirname, "../utils/index.html");
+      // const htmlContent = fs.readFileSync(filePath, "utf-8");
 
       const result = await transporter.sendMail({
         from: '"✨ Akshat Jaiswal ✨" <21052646@kiit.ac.in>', // sender address
@@ -247,7 +260,7 @@ router.post(
 //! Route 3: Get logged in user details using POST: /api/auth/getuser. Login Required
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
-    let userID = req.user.id;
+    let userID = req.user.id; //ab kyuki maine fetchuser use kiya hua hai toh mere req.user me hoga logged in user  
     const user = await User.findById(userID).select("-password");
     res.json({ user });
   } catch (error) {
