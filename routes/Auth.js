@@ -316,7 +316,7 @@ router.post("/verify-email", async (req, res) => {
       secure: true,
       auth: {
         user: "21052646@kiit.ac.in",
-        pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
+        pass: "cprnljltrvkramlu", //got the password from google account itself inside App Passwords
       },
     });
 
@@ -393,7 +393,7 @@ router.post("/forgot-password", async (req, res) => {
       secure: true,
       auth: {
         user: "21052646@kiit.ac.in",
-        pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
+        pass: "cprnljltrvkramlu", //got the password from google account itself inside App Passwords
       },
     });
 
@@ -490,7 +490,7 @@ router.post("/reset-password", isResetPasswordValid, async (req, res) => {
       secure: true,
       auth: {
         user: "21052646@kiit.ac.in",
-        pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
+        pass: "cprnljltrvkramlu", //got the password from google account itself inside App Passwords
       },
     });
 
@@ -555,7 +555,7 @@ router.post("/resend", async (req, res) => {
       secure: true,
       auth: {
         user: "21052646@kiit.ac.in",
-        pass: "unvhjmcnpiuafimo", //got the password from google account itself inside App Passwords
+        pass: "cprnljltrvkramlu", //got the password from google account itself inside App Passwords
       },
     });
 
